@@ -21,6 +21,7 @@ export default {
 .leaderboard {
   display: flex;
   flex-direction: column;
-  // align-items: flex-start;
+  padding-left: 1em;
+  border-left: 1px solid lightgray;
 }
 </style>

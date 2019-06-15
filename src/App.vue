@@ -6,39 +6,55 @@
 
     <ApiKeyInput v-model="apiKey" />
 
-    <div class="request-container">
-      <RequestRow :step="1" @click="getLeaderboards" :hint="!leaderboards">
-        Get leaderboards
-      </RequestRow>
+    <main>
+      <div class="request-container">
+        <RequestRow :step="1" @click="getLeaderboards" :hint="!leaderboards">
+          Get leaderboards
+        </RequestRow>
 
-      <RequestRow v-if="leaderboards" :step="2" @click="getScores" :hint="!scores">
-        Get scores
-        <template #settings>
-          <select name="leaderboard" id="leaderboard" v-model="leaderboard">
-            <option v-for="option in leaderboardOptions" :key="option" :value="option">
-              {{ leaderboards[option].name }}
-            </option>
-          </select>
+        <RequestRow v-if="leaderboards" :step="2" @click="getScores" :hint="!scores">
+          Get scores
+          <template #settings>
+            <div class="score-settings">
+              <div class="filters">
+                <select name="leaderboard" id="leaderboard" v-model="leaderboard">
+                  <option v-for="option in leaderboardOptions" :key="option" :value="option">
+                    {{ leaderboards[option].name }}
+                  </option>
+                </select>
 
-          <select name="platform" id="platform" v-model="platform">
-            <option v-for="option in platformOptions" :key="option" :value="option">
-              {{ leaderboards[leaderboard].platforms[option].name }}
-            </option>
-          </select>
+                <select name="platform" id="platform" v-model="platform">
+                  <option v-for="option in platformOptions" :key="option" :value="option">
+                    {{ leaderboards[leaderboard].platforms[option].name }}
+                  </option>
+                </select>
 
-          <select name="difficulty" id="difficulty" v-model="difficulty">
-            <option v-for="option in difficultyOptions" :key="option" :value="option">
-              {{ leaderboards[leaderboard].difficulties[option].name }}
-            </option>
-          </select>
+                <select name="difficulty" id="difficulty" v-model="difficulty">
+                  <option v-for="option in difficultyOptions" :key="option" :value="option">
+                    {{ leaderboards[leaderboard].difficulties[option].name }}
+                  </option>
+                </select>
+              </div>
 
-          <input type="range" min="1" :max="totalPages" v-model="page">
-          <input type="range" min="1" max="25" v-model="pageSize">
-        </template>
-      </RequestRow>
-    </div>
+              <div class="pagination">
+                <div class="slider">
+                  <span>{{ pageSize }} results per page</span>
+                  <input type="range" min="1" max="25" v-model="pageSize">
+                </div>
+                <div class="slider">
+                 <span>page {{ page }}</span>
+                 <input type="range" min="1" :max="totalPages" v-model="page">
+                </div>
+              </div>
+            </div>
+          </template>
+        </RequestRow>
+      </div>
 
-    <LeaderboardDisplay v-if="scores" :leaderboard="scores.leaderboard" />
+      <aside class="result">
+        <LeaderboardDisplay v-if="scores" :leaderboard="scores.leaderboard" />
+      </aside>
+    </main>
   </div>
 </template>
 
@@ -168,8 +184,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300&display=swap');
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -184,11 +202,47 @@ export default {
   }
 }
 
+main {
+  margin: 0 10%;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+
 .request-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   width: 800px;
+}
+
+.score-settings {
+  display: flex;
+  flex-direction: column;
+
+  .filters {
+    display: flex;
+    select {
+      font-size: 1.2em;
+      margin: 0 0.3em;
+    }
+
+    margin-bottom: 1em;
+  }
+
+  .pagination {
+    display: flex;
+
+    .slider {
+      margin: 0.2em 0.5em;
+      display: flex;
+      flex-direction: column;
+
+      span {
+        align-self: flex-start;
+      }
+    }
+  }
 }
 </style>
