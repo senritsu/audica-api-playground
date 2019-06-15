@@ -1,29 +1,5 @@
 # audica-api-playground
 
-## Project setup
-```
-npm install
-```
+A small GUI for the Audica API to play around with it. Get your API key at https://discord.gg/harmonix.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5af30328-2f3b-418b-81b4-0513ad2c5ec3/deploy-status)](https://app.netlify.com/sites/epic-villani-f39bd3/deploys)
