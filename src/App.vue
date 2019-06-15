@@ -55,6 +55,8 @@
         <LeaderboardDisplay v-if="scores" :leaderboard="scores.leaderboard" />
       </aside>
     </main>
+
+    <footer><a href="https://github.com/senritsu/audica-api-playground">https://github.com/senritsu/audica-api-playground</a></footer>
   </div>
 </template>
 
@@ -207,6 +209,13 @@ main {
   align-self: stretch;
   display: flex;
   justify-content: space-between;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+
+  opacity: 0.5;
 }
 
 .request-container {
