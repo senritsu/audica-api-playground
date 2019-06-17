@@ -8,12 +8,21 @@
       </div>
       <span class="platform">{{ platform }}</span>
     </div>
-    <div class="score">{{ score }} <span v-if="full_combo" class="fc">FC</span></div>
+    <div class="score">
+      <FontAwesomeIcon v-if="full_combo" :icon="icons.fc"/>
+      {{ score }}
+    </div>
   </div>
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faStar, faCode } from '@fortawesome/free-solid-svg-icons'
+
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     developer: Boolean,
     full_combo: Boolean,
@@ -21,6 +30,14 @@ export default {
     rank: Number,
     score: Number,
     user: String
+  },
+  computed: {
+    icons () {
+      return {
+        dev: faCode,
+        fc: faStar
+      }
+    }
   }
 }
 </script>
